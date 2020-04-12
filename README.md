@@ -1,4 +1,4 @@
-# travelers_hub_fe
+# Silva Client
 
 > My posh Nuxt.js project
 
