@@ -21,7 +21,7 @@ module.exports = {
     API_URL: process.env.API_URL
   },
   router: {
-    //middleware: 'header'
+    middleware: ['reset_message', 'authenticate']
   },
   /*
   ** Customize the progress-bar color
@@ -41,8 +41,10 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    {src: 'bulma/bulma.sass', lang: 'sass'},
     '~/assets/stylesheets/reset.css',
-    '~/assets/stylesheets/common.sass'
+    '~/assets/stylesheets/common.sass',
+    '~/assets/stylesheets/modal.sass'
   ],
 
   styleResources: {
@@ -50,20 +52,13 @@ module.exports = {
       '~assets/stylesheets/_variables.sass',
     ]
   },
-  webfontloader: {
-    google: {
-      families: ['Montserrat:400,700', 'Kavivanar', 'Cookie']
-    }
-  },
-  markdownit: {
-    injected: true,
-    html: true
-  },
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~plugins/html_element'
+    '~plugins/html_element',
+    '~plugins/formatter',
+    {src: '~plugins/axios', ssr: false}
   ],
   /*
   ** Nuxt.js dev-modules
@@ -77,7 +72,7 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'http://localhost:1337'
+    baseURL: 'http://localhost:3001'
   },
   /*
   ** Build configuration
