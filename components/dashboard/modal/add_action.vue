@@ -53,7 +53,9 @@ export default {
     },
     async addAction () {
       if (this.role !== '' && this.text !== '') {
-        if (Object.keys(this.$store.state.dashboard.team[this.role].user).length > 0) {
+        if (Object.keys(this.$store.state.dashboard.team[this.role].user).length < 1 || this.$store.state.dashboard.team[this.role].user.inviting) {
+          this.$store.commit('message/setMessage', { message: '選択した役割には事業者が設定されていません。', messageType: 'warning' })
+        } else {
           const userId = this.$store.state.dashboard.team[this.role].user.id
           await this.$axios.post('/api/v1/actions', {
             user_id: userId,
@@ -68,8 +70,6 @@ export default {
             this.toggleModal()
             this.$store.commit('message/setMessage', { message: 'アクションを追加できませんでした。もう一度お試しください。', messageType: 'danger' })
           })
-        } else {
-          this.$store.commit('message/setMessage', { message: '選択した役割には事業者が設定されていません。', messageType: 'warning' })
         }
       } else {
         this.$store.commit('message/setMessage', { message: '入力されていない情報があります。', messageType: 'warning' })

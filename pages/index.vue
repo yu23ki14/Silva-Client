@@ -19,22 +19,23 @@
       button.title.is-6.dashboard-menu-client-new(@click="clientModal")
         |患者を追加する＋
     .dashboard.dashboard-column.column
-      DashboardHeader
+      DashboardHeader(v-on:updateAddModal="updateAddClient")
       .dashboard-main-container
         .dashboard-main-inner
           div(v-if="$store.state.dashboard.team != null")
             DashboardTeam
             DashboardStatusHistory
             DashboardActionHistory
-          p.title.is-5(v-else-if="$store.state.dashboard.clients.length > 0")
+          p.title.is-5(v-else-if="Object.keys($store.state.dashboard.clients).length > 0")
             |リストから詳細を見る患者を選択してください。
           p.title.is-5(v-else)
             |患者を追加する＋ボタンから患者を追加してください。
     AddUserModal
-    AddClientModal
+    AddClientModal(:data="add_client")
     AddStatusModal
     AddActionModal
     SetMyRoleModal
+    InvitationModal(:data="invitations")
 </template>
 
 <script>
@@ -48,6 +49,7 @@ import AddClientModal from '../components/dashboard/modal/add_client'
 import AddStatusModal from '../components/dashboard/modal/add_status'
 import AddActionModal from '../components/dashboard/modal/add_action'
 import SetMyRoleModal from '../components/dashboard/modal/set_my_role'
+import InvitationModal from '../components/dashboard/modal/invitations'
 
 export default {
   components: {
@@ -60,13 +62,23 @@ export default {
     AddClientModal,
     AddStatusModal,
     AddActionModal,
-    SetMyRoleModal
+    SetMyRoleModal,
+    InvitationModal
   },
   data () {
     return {
       user: [],
+      invitations: [],
       statuses: [],
-      actions: []
+      actions: [],
+      add_client: {
+        grade: null,
+        age: null,
+        gender: null,
+        initial: null,
+        address: null,
+        underlying_illnesses: []
+      }
     }
   },
   mounted () {
@@ -78,6 +90,10 @@ export default {
         .then((res) => {
           this.user = res.data.user
           this.$store.commit('dashboard/setClients', { data: res.data.clients })
+          this.invitations = res.data.invitations
+          if (res.data.invitations.length > 0) {
+            this.$store.commit('modal/toggleInvitations')
+          }
         }).catch(() => {
           this.$store.commit('message/setMessage', { message: 'エラーが発生しました。ブラウザをリロードしてみてください。', messageType: 'danger' })
         })
@@ -90,6 +106,7 @@ export default {
           const statuses = res.data.statuses
           const actions = res.data.actions
           const tmpTeam = { care_manager: { user: {}, action: {} }, clinic: { user: {}, action: {} }, nurse: { user: {}, action: {} }, care: { user: {}, action: {} }, rehabilitation: { user: {}, action: {} }, medicine: { user: {}, action: {} }, day_service: { user: {}, action: {} }, dentistry: { user: {}, action: {} }, other: { user: {}, action: {} } }
+          console.log(team)
           team.forEach(member =>
             (tmpTeam[member.role] = { user: member.user, action: member.action[0] || {} })
           )
@@ -106,6 +123,17 @@ export default {
     },
     clientModal () {
       this.$store.commit('modal/toggleAddClient')
+      this.add_client = {
+        grade: null,
+        age: null,
+        gender: null,
+        initial: null,
+        address: null,
+        underlying_illnesses: []
+      }
+    },
+    updateAddClient () {
+      this.add_client = { ...this.$store.state.dashboard.client }
     }
   }
 }

@@ -4,14 +4,14 @@
     nuxt-link(to="/")
       |< ホームに戻る
     .information-links
-      img(src="~assets/images/logos/logo-blue.png")
-      nuxt-link(to="/auth/settings")
+      img(src="~assets/images/logos/logo-blue.svg" width="250")
+      //nuxt-link(to="/auth/settings")
         p.subtitle
           |アカウント情報を編集
-      nuxt-link(to="/help")
+      //nuxt-link(to="/help")
         p.subtitle
           |使い方ガイド
-      nuxt-link(to="/needhelps")
+      //nuxt-link(to="/needhelps")
         p.subtitle
           |助けを必要としているチーム
       nuxt-link(to="/auth/logout")

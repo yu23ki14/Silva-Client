@@ -28,6 +28,8 @@
           td
             |ケアマネ
           td
+            span.inviting(v-if="$store.state.dashboard.team.care_manager.user.inviting")
+              |招待中
             |{{$store.state.dashboard.team.care_manager.user.name}}
           td
             |{{$store.state.dashboard.team.care_manager.action.text}}
@@ -43,6 +45,8 @@
           td
             |訪問診療
           td
+            span.inviting(v-if="$store.state.dashboard.team.clinic.user.inviting")
+              |招待中
             |{{$store.state.dashboard.team.clinic.user.name}}
           td
             |{{$store.state.dashboard.team.clinic.action.text}}
@@ -58,6 +62,8 @@
           td
             |訪問看護
           td
+            span.inviting(v-if="$store.state.dashboard.team.nurse.user.inviting")
+              |招待中
             |{{$store.state.dashboard.team.nurse.user.name}}
           td
             |{{$store.state.dashboard.team.nurse.action.text}}
@@ -73,6 +79,8 @@
           td
             |訪問介護
           td
+            span.inviting(v-if="$store.state.dashboard.team.care.user.inviting")
+              |招待中
             |{{$store.state.dashboard.team.care.user.name}}
           td
             |{{$store.state.dashboard.team.care.action.text}}
@@ -88,6 +96,8 @@
           td
             |訪問リハ
           td
+            span.inviting(v-if="$store.state.dashboard.team.rehabilitation.user.inviting")
+              |招待中
             |{{$store.state.dashboard.team.rehabilitation.user.name}}
           td
             |{{$store.state.dashboard.team.rehabilitation.action.text}}
@@ -103,6 +113,8 @@
           td
             |訪問薬剤
           td
+            span.inviting(v-if="$store.state.dashboard.team.medicine.user.inviting")
+              |招待中
             |{{$store.state.dashboard.team.medicine.user.name}}
           td
             |{{$store.state.dashboard.team.medicine.action.text}}
@@ -118,6 +130,8 @@
           td
             |デイ/施設
           td
+            span.inviting(v-if="$store.state.dashboard.team.day_service.user.inviting")
+              |招待中
             |{{$store.state.dashboard.team.day_service.user.name}}
           td
             |{{$store.state.dashboard.team.day_service.action.text}}
@@ -133,6 +147,8 @@
           td
             |訪問歯科
           td
+            span.inviting(v-if="$store.state.dashboard.team.dentistry.user.inviting")
+              |招待中
             |{{$store.state.dashboard.team.dentistry.user.name}}
           td
             |{{$store.state.dashboard.team.dentistry.action.text}}
@@ -148,6 +164,8 @@
           td
             |その他
           td
+            span.inviting(v-if="$store.state.dashboard.team.other.user.inviting")
+              |招待中
             |{{$store.state.dashboard.team.other.user.name}}
           td
             |{{$store.state.dashboard.team.other.action.text}}
@@ -211,4 +229,6 @@ export default {
       line-height: 1.2rem
   .button
     background-color: lightgray
+  .inviting
+    padding-right: 5px
 </style>

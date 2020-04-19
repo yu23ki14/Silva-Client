@@ -2,20 +2,18 @@
   .login-container.container
     .columns
       .column.is-4.is-offset-4
-        img(src="~assets/images/logos/logo-blue.png")
+        img(src="~assets/images/logos/logo-blue.svg" width="250")
 
         .field
           p.control.has-icons-left.has-icons-right
             input.input(type="email" placeholder="Email" v-model="email")
             span.icon.is-small.is-left
-              i.fas.fa-envelope
-            span.icon.is-small.is-right
-              i.fas.fa-check
+              font-awesome-icon(:icon="['fas', 'envelope']")
         .field
           p.control.has-icons-left
             input.input(type="password" placeholder="Password" v-model="password")
             span.icon.is-small.is-left
-              i.fas.fa-lock
+              font-awesome-icon(:icon="['fas', 'lock']")
         .field
           p.control
             button.button.is-fullwidth.is-info(@click="login")

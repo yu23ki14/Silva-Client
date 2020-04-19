@@ -2,30 +2,28 @@
   .signup-container.container
     .columns
       .column.is-4.is-offset-4
-        img(src="~assets/images/logos/logo-blue.png")
+        img(src="~assets/images/logos/logo-blue.svg" width="250")
 
         .field
           p.control.has-icons-left.has-icons-right
             input.input(type="email" placeholder="Email" v-model="email")
             span.icon.is-small.is-left
-              i.fas.fa-envelope
-            span.icon.is-small.is-right
-              i.fas.fa-check
+              font-awesome-icon(:icon="['fas', 'envelope']")
         .field
           p.control.has-icons-left
             input.input(type="password" placeholder="パスワード" v-model="password")
             span.icon.is-small.is-left
-              i.fas.fa-lock
+              font-awesome-icon(:icon="['fas', 'lock']")
         .field
           p.control.has-icons-left
             input.input(type="text" placeholder="事業所名" v-model="name")
             span.icon.is-small.is-left
-              i.fas.fa-lock
+              font-awesome-icon(:icon="['fas', 'building']")
         .field
           p.control.has-icons-left
             input.input(type="text" placeholder="電話番号：任意" v-model="phone_number")
             span.icon.is-small.is-left
-              i.fas.fa-lock
+              font-awesome-icon(:icon="['fas', 'phone']")
         // .control.has-icons-left.field
           .select.is-fullwidth
             select(v-model="role")
@@ -71,12 +69,19 @@ export default {
   },
   methods: {
     async signUp () {
+      let url
+      if (this.$route.query.invitation_uid !== undefined) {
+        url = '/api/v1/auth?invitation_uid=' + this.$route.query.invitation_uid
+      } else {
+        url = '/api/v1/auth'
+      }
       if (this.email !== '' && this.password !== '' && this.name !== '') {
-        await this.$axios.post('/api/v1/auth', {
+        await this.$axios.post(url, {
           email: this.email,
           password: this.password,
           name: this.name,
-          phone_number: this.phone_number
+          phone_number: this.phone_number,
+          invitation_uid: 'teadijajoisjfaduja'
         })
           .then((response) => {
             localStorage.setItem('client', response.headers.client)

@@ -22,7 +22,7 @@
           p.title.is-5
             |{{$store.state.dashboard.statuses.length > 0 ? $store.state.dashboard.statuses[0].text : '未入力'}}
       .dashboard-header-buttons.buttons
-        button.button.is-fullwidth
+        button.button.is-fullwidth(@click="editClientModal")
           |患者情報を編集
         button.button.is-status-update(@click="statusModal($store.state.dashboard.client.id)")
           |ステータスを更新
@@ -33,6 +33,10 @@ export default {
   methods: {
     statusModal (c) {
       this.$store.commit('modal/toggleAddStatus', { clientId: c })
+    },
+    editClientModal () {
+      this.$store.commit('modal/toggleAddClient', 'edit')
+      this.$emit('updateAddModal')
     }
   }
 }

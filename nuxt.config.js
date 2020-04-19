@@ -35,7 +35,8 @@ module.exports = {
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    'nuxt-fontawesome'
   ],
   /*
   ** Global CSS
@@ -50,6 +51,14 @@ module.exports = {
   styleResources: {
     sass: [
       '~assets/stylesheets/_variables.sass',
+    ]
+  },
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      }
     ]
   },
   /*

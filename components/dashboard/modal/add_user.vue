@@ -16,7 +16,7 @@
               input.input.is-fullwidth(type="text" placeholder="メールアドレス" v-model="email")
         div(v-else-if="type === 1")
           p.subtitle.is-5
-            |{{user.name}} さんを {{ roleFormatter(this.$store.state.modal.add_user.role) }} として追加してよろしいですか？
+            |{{user.name}} さんを {{ roleFormatter(this.$store.state.modal.add_user.role) }} として招待してよろしいですか？
         div(v-else-if="type === 2")
           p.subtitle.is-5
             |このメールアドレス（{{email}}）はSilvaに登録されていません。Silvaへの招待メールを送り、チームへ追加しますか？
@@ -26,10 +26,10 @@
           |追加せずに閉じる
         button.button.is-primary(@click="validateEmail", v-if="type === 0")
           |追加
-        button.button.is-primary(@click="addUser", v-else-if="type === 1")
-          |追加
-        button.button.is-primary(@click="inviteUser", v-else-if="type === 2")
-          |追加・招待する
+        button.button.is-primary(@click="inviteUserTeam", v-else-if="type === 1")
+          |招待
+        button.button.is-primary(@click="inviteUserSilva", v-else-if="type === 2")
+          |招待
     button.modal-close.is-large(aria-label="close", @click="toggleModal")
 </template>
 
@@ -69,11 +69,12 @@ export default {
         this.$store.commit('message/setMessage', { message: '入力されていない情報があります。', messageType: 'warning' })
       }
     },
-    async addUser () {
-      await this.$axios.post('/api/v1/users', {
-        email: this.user.email,
+    async inviteUserTeam () {
+      await this.$axios.post('/api/v1/invitations', {
+        user_id: this.user.id,
         role: this.$store.state.modal.add_user.role,
-        client_id: this.$store.state.modal.add_user.client_id
+        client_id: this.$store.state.modal.add_user.client_id,
+        user_present: true
       })
         .then((response) => {
           this.$store.commit('dashboard/updateTeamRole', { data: response.data })
@@ -83,11 +84,12 @@ export default {
           return error
         })
     },
-    async inviteUser () {
-      await this.$axios.post('/api/v1/users', {
-        email: this.user.email,
+    async inviteUserSilva () {
+      await this.$axios.post('/api/v1/invitations', {
+        email: this.email,
         role: this.$store.state.modal.add_user.role,
-        client_id: this.$store.state.modal.add_user.client_id
+        client_id: this.$store.state.modal.add_user.client_id,
+        user_present: false
       })
         .then((response) => {
           this.$store.commit('dashboard/updateTeamRole', { data: response.data })
