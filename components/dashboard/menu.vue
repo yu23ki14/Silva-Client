@@ -10,6 +10,8 @@
           nuxt-link(to="/information")
             |ヘルプ・設定
       .dashboard-menu-clients-container
+        button.title.is-6.dashboard-menu-client-new(@click="$emit('clientModal')")
+          |患者を追加する＋
         ul.dashboard-menu-clients-legend
           li
             Client(:data="{grade: 'クラス', age: '年齢', gender: '性別', initial: '姓', address: '居住地', statuses: [{text: 'ステータス'}]}" :background="'#7a7a7a'")
@@ -17,8 +19,6 @@
           li(v-for="(client, key, index) in $store.state.dashboard.clients")
             Client(:data="client" :background="client.id === $store.state.dashboard.client.id ? '#bbd4f5' : (index % 2 != 0 ? '#cacaca' : '#e8e8e8')")
             nuxt-link(:to="'/clients/' + client.uid")
-      button.title.is-6.dashboard-menu-client-new(@click="$emit('clientModal')")
-        |患者を追加する＋
 </template>
 
 <script>
@@ -65,7 +65,7 @@ export default {
   text-overflow: ellipsis
 
 .dashboard-menu-clients
-  height: calc( 100vh - 230px )
+  height: calc( 100vh - 235px )
   overflow: auto
   li
     cursor: pointer
@@ -86,4 +86,5 @@ export default {
   width: 100%
   border: none
   cursor: pointer
+  margin-bottom: 0 !important
 </style>

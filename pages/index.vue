@@ -58,17 +58,19 @@ export default {
   },
   methods: {
     async getData () {
-      await this.$axios.get('/api/v1/dashboard')
-        .then((res) => {
-          this.$store.commit('dashboard/setUser', { data: res.data.user })
-          this.$store.commit('dashboard/setClients', { data: res.data.clients })
-          this.invitations = res.data.invitations
-          if (res.data.invitations.length > 0) {
-            this.$store.commit('modal/toggleInvitations')
-          }
-        }).catch(() => {
-          this.$store.commit('message/setMessage', { message: 'エラーが発生しました。ブラウザをリロードしてみてください。', messageType: 'danger' })
-        })
+      if (this.$store.state.dashboard.user.name === undefined || Object.keys(this.$store.state.dashboard.clients).length < 1) {
+        await this.$axios.get('/api/v1/dashboard')
+          .then((res) => {
+            this.$store.commit('dashboard/setUser', { data: res.data.user })
+            this.$store.commit('dashboard/setClients', { data: res.data.clients })
+            this.invitations = res.data.invitations
+            if (res.data.invitations.length > 0) {
+              this.$store.commit('modal/toggleInvitations')
+            }
+          }).catch(() => {
+            this.$store.commit('message/setMessage', { message: 'エラーが発生しました。ブラウザをリロードしてみてください。', messageType: 'danger' })
+          })
+      }
     },
     clientModal () {
       this.$store.commit('modal/toggleAddClient')
