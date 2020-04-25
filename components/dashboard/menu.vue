@@ -1,6 +1,6 @@
 <template lang="pug">
   .dashboard-menu
-    .dashboard-menu-inner
+    .dashboard-menu-inner(:style="{ height: height + 'px' }")
       .dashboard-menu-user-info
         p.subtitle.is-6
           |ログイン中
@@ -10,15 +10,15 @@
           nuxt-link(to="/information")
             |ヘルプ・設定
       .dashboard-menu-clients-container
-        button.title.is-6.dashboard-menu-client-new(@click="$emit('clientModal')")
-          |患者を追加する＋
         ul.dashboard-menu-clients-legend
           li
             Client(:data="{grade: 'クラス', age: '年齢', gender: '性別', initial: '姓', address: '居住地', statuses: [{text: 'ステータス'}]}" :background="'#7a7a7a'")
-        ul.dashboard-menu-clients
+        ul.dashboard-menu-clients(:style="{ height: height - 235 + 'px' }")
           li(v-for="(client, key, index) in $store.state.dashboard.clients")
             Client(:data="client" :background="client.id === $store.state.dashboard.client.id ? '#bbd4f5' : (index % 2 != 0 ? '#cacaca' : '#e8e8e8')")
             nuxt-link(:to="'/clients/' + client.uid")
+      button.title.is-6.dashboard-menu-client-new(@click="$emit('clientModal')")
+        |患者を追加する＋
 </template>
 
 <script>
@@ -26,6 +26,14 @@ import Client from './client'
 export default {
   components: {
     Client
+  },
+  data () {
+    return {
+      height: 0
+    }
+  },
+  mounted () {
+    this.height = window.innerHeight
   }
 }
 </script>
@@ -37,7 +45,6 @@ export default {
 .dashboard-menu-inner
   position: fixed
   width: 250px
-  height: 100vh
   border-right: 2px solid lightgrey
   background-color: #eaeaea
   @include mediaQuery-down(sm)
@@ -65,7 +72,6 @@ export default {
   text-overflow: ellipsis
 
 .dashboard-menu-clients
-  height: calc( 100vh - 235px )
   overflow: auto
   li
     cursor: pointer
@@ -86,5 +92,4 @@ export default {
   width: 100%
   border: none
   cursor: pointer
-  margin-bottom: 0 !important
 </style>
