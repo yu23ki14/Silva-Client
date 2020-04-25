@@ -102,7 +102,7 @@ export default {
 
 <style lang="sass">
 .signup-container
-  padding-top: 50px
+  padding: 50px 10px 0
   text-align: center
   img
     margin-bottom: 30px

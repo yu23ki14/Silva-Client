@@ -53,7 +53,7 @@ export default {
 
 <style lang="sass">
 .login-container
-  padding-top: 100px
+  padding: 100px 10px 0
   text-align: center
   img
     margin-bottom: 30px
