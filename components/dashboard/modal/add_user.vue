@@ -115,6 +115,7 @@ export default {
   .field
     margin-bottom: 20px
     display: flex
+    flex-wrap: wrap
     &:last-child
       margin-bottom: 0
   .control

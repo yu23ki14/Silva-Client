@@ -67,4 +67,5 @@ export default {
       padding: .9em .75em
       font-size: 1rem
       line-height: 1.2rem
+      word-break: break-all
 </style>

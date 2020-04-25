@@ -50,7 +50,7 @@ module.exports = {
 
   styleResources: {
     sass: [
-      '~assets/stylesheets/_variables.sass',
+      '~assets/stylesheets/_variables.sass'
     ]
   },
   fontawesome: {

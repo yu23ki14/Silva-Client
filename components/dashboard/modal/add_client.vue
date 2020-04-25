@@ -106,7 +106,7 @@ export default {
     },
     async updateClient () {
       if (this.data.grade !== null && this.data.age !== null && this.data.gender !== null && this.data.initial !== null && this.data.address !== null) {
-        await this.$axios.put('/api/v1/clients/' + this.$store.state.dashboard.client.id, {
+        await this.$axios.put('/api/v1/clients/' + this.$store.state.dashboard.client.uid, {
           grade: this.data.grade,
           age: this.data.age,
           gender: this.data.gender,

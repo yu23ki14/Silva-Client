@@ -9,26 +9,26 @@
             |リストを閉じる
           span(v-else)
             |リストを開く
-
-    table.table.dashboard-action-history-table.is-striped
-      thead
-        tr
-          th
-            |役割
-          th
-            |アクション
-          th
-            |更新日時
-      tbody(v-if="list")
-        tr(v-for="action in $store.state.dashboard.actions")
-          td
-            |{{roleFormatter(action.role, true)}}
-          td
-            |{{action.text}}
-          td
-            |{{dateFormatter(action.created_at, 'YYYY/MM/DD (WW)')}}
-            br
-            |{{dateFormatter(action.created_at, 'hh時mm分')}}
+    .dashboard-action-history-table
+      table.table.is-striped
+        thead
+          tr
+            th
+              |役割
+            th
+              |アクション
+            th
+              |更新日時
+        tbody(v-if="list")
+          tr(v-for="action in $store.state.dashboard.actions")
+            td
+              |{{roleFormatter(action.role, true)}}
+            td
+              |{{action.text}}
+            td
+              |{{dateFormatter(action.created_at, 'YYYY/MM/DD (WW)')}}
+              br
+              |{{dateFormatter(action.created_at, 'hh時mm分')}}
 </template>
 
 <script>
@@ -61,7 +61,12 @@ export default {
 .dashboard-action-history-table
   width: 100%
   margin-top: 20px
-  border: 1px solid #dbdbdb
+  overflow: auto
+  table
+    width: 100%
+    border: 1px solid #dbdbdb
+    @include mediaQuery-down(sm)
+      width: 500px
   thead
     th
       &:nth-child(1)
@@ -73,4 +78,5 @@ export default {
       padding: .9em .75em
       font-size: 1rem
       line-height: 1.2rem
+      word-break: break-all
 </style>

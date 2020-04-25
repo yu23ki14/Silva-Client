@@ -1,5 +1,6 @@
 export const state = () => ({
-  clients: [],
+  user: {},
+  clients: {},
   team: null,
   client: {},
   statuses: [],
@@ -7,6 +8,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+  setUser (state, { data }) {
+    state.user = data
+  },
   setClients (state, { data }) {
     state.clients = data
   },
