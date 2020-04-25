@@ -54,7 +54,9 @@ export default {
   min-height: 97px
   background-color: $brand-primary-thin
   .dashboard-header-inner
+    opacity: 0
     &:first-of-type
+      opacity: 1
       position: fixed
       width: calc( 100% - 250px )
       @include mediaQuery-down(sm)
