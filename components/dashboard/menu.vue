@@ -42,7 +42,8 @@ export default {
   background-color: #eaeaea
   @include mediaQuery-down(sm)
     display: none
-    width: auto
+    width: 100%
+    border-right: none
     .is-menu-active &
       display: block
 
