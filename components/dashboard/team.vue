@@ -2,7 +2,7 @@
   .dashboard-team
     .dashboard-team-header
       p.title.is-5
-        |チーム情報
+        |チーム最新情報
       .dashboard-team-buttons
         button.button(@click="toggleList()")
           span(v-if="list")

@@ -5,7 +5,7 @@
       |< ホームに戻る
     .information-links
       img(src="~assets/images/logos/logo-blue.svg" width="250")
-      //nuxt-link(to="/auth/settings")
+      nuxt-link(to="/auth/edit")
         p.subtitle
           |アカウント情報を編集
       //nuxt-link(to="/help")

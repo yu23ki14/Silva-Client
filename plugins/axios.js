@@ -1,5 +1,6 @@
 export default function ({ $axios, store, route, redirect }) {
   $axios.onRequest((config) => {
+    store.commit('http/requesting')
     config.headers.client = window.localStorage.getItem('client')
     config.headers['access-token'] = window.localStorage.getItem('access-token')
     config.headers.uid = window.localStorage.getItem('uid')
@@ -8,6 +9,7 @@ export default function ({ $axios, store, route, redirect }) {
 
   $axios.onResponse((response) => {
     if (response.headers.client) {
+      store.commit('http/responded')
       localStorage.setItem('access-token', response.headers['access-token'])
       localStorage.setItem('client', response.headers.client)
       localStorage.setItem('uid', response.headers.uid)

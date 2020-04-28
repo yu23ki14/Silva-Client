@@ -10,7 +10,7 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Travelers Hub is a tourist information center supported by locals. At the center, you can not only learn about popular tourist destinations, but also hidden gems that only locals know. We want to connect international visitors to the undiscovered parts of Japan, so that they can have an authentic cultural experience. We are awaiting your visit!' }
+      { hid: 'description', name: 'description', content: 'Silvaは地域包括医療において、新型コロナウイルス情報をチームで共有し、アクションプランを素早く決定することを手助けします。' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

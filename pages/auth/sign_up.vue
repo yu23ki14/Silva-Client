@@ -80,13 +80,13 @@ export default {
           email: this.email,
           password: this.password,
           name: this.name,
-          phone_number: this.phone_number,
-          invitation_uid: 'teadijajoisjfaduja'
+          phone_number: this.phone_number
         })
           .then((response) => {
             localStorage.setItem('client', response.headers.client)
             localStorage.setItem('access-token', response.headers['access-token'])
             localStorage.setItem('uid', response.headers.uid)
+            console.log(response.data)
             window.location.href = '/'
           },
           () => {
