@@ -18,7 +18,8 @@ module.exports = {
     ]
   },
   env: {
-    API_URL: process.env.API_URL
+    SILVA_API_URL: process.env.SILVA_API_URL,
+    SCA_API_URL: process.env.SCA_API_URL
   },
   router: {
     middleware: ['reset_message', 'authenticate']
@@ -67,6 +68,7 @@ module.exports = {
   plugins: [
     '~plugins/html_element',
     '~plugins/formatter',
+    '~plugins/endpoint',
     {src: '~plugins/axios', ssr: false}
   ],
   /*
@@ -81,7 +83,7 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: process.env.API_URL
+    baseURL: process.env.SILVA_API_URL
   },
   /*
   ** Build configuration

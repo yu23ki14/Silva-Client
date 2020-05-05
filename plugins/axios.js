@@ -9,13 +9,15 @@ export default function ({ $axios, store, route, redirect }) {
 
   $axios.onResponse((response) => {
     if (response.headers.client) {
-      store.commit('http/responded')
       localStorage.setItem('access-token', response.headers['access-token'])
       localStorage.setItem('client', response.headers.client)
       localStorage.setItem('uid', response.headers.uid)
       localStorage.setItem('token-type', response.headers['token-type'])
     }
+    store.commit('http/responded')
   })
+
+  const nonAuthPath = ['/auth/login', '/auth/sign_up', '/sca', '/sca/assessment']
 
   if (localStorage.getItem('access-token') !== null) {
     $axios.get('/api/v1/auth/validate_token')
@@ -37,7 +39,7 @@ export default function ({ $axios, store, route, redirect }) {
         store.commit('message/setMessage', { message: 'ログインしてください。' })
         window.location.href = ('/auth/login')
       })
-  } else if (route.path !== '/auth/login' && route.path !== '/auth/sign_up') {
+  } else if (nonAuthPath.includes(route.path)) {
     window.location.href = ('/auth/login')
   }
 }

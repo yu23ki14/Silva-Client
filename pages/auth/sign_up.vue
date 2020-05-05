@@ -86,7 +86,6 @@ export default {
             localStorage.setItem('client', response.headers.client)
             localStorage.setItem('access-token', response.headers['access-token'])
             localStorage.setItem('uid', response.headers.uid)
-            console.log(response.data)
             window.location.href = '/'
           },
           () => {

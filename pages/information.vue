@@ -8,9 +8,9 @@
       nuxt-link(to="/auth/edit")
         p.subtitle
           |アカウント情報を編集
-      //nuxt-link(to="/help")
+      nuxt-link(to="/sca")
         p.subtitle
-          |使い方ガイド
+          |SCA covid19
       //nuxt-link(to="/needhelps")
         p.subtitle
           |助けを必要としているチーム
