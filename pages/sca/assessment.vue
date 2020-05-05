@@ -62,8 +62,8 @@ export default {
 <style lang="sass">
 .sca-container
   padding: 30px 15px 0
+  .field
+    padding-bottom: 30px
 .sca-form-container
   margin-left: 10px
-.field
-  padding-bottom: 30px
 </style>
