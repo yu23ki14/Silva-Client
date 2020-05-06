@@ -28,6 +28,7 @@ export default {
 
 <style lang="sass">
 .sca-result-container
+  padding: 20px 15px 0
   p
     margin-top: 20px
 </style>
