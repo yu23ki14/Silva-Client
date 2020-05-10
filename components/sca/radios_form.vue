@@ -1,6 +1,6 @@
 <template lang="pug">
   ul.radios-form
-    li(v-for="item in q")
+    li.field(v-for="item in q")
       p
         |{{item.label}}
       label
@@ -31,8 +31,6 @@ export default {
 
 <style lang="sass">
 .radios-form
-  li
-    margin-bottom: 20px
   p
     margin-bottom: 10px
   label

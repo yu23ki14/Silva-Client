@@ -69,7 +69,8 @@ module.exports = {
     '~plugins/html_element',
     '~plugins/formatter',
     '~plugins/endpoint',
-    {src: '~plugins/axios', ssr: false}
+    {src: '~plugins/axios', ssr: false},
+    { src: '~/plugins/vue_datepicker', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
