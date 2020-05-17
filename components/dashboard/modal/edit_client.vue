@@ -5,32 +5,16 @@
       .modal-inner
         .field
           p.subtitle.is-6
-            |優先度
+            |アラート
           .control
             label.radio
-              input(type="radio" v-model="grade" name="grade" value="P")
+              input(type="radio" v-model="alert" name="alert" value="true")
               span
-                |P
+                |ON
             label.radio
-              input(type="radio" v-model="grade" name="grade" value="G3")
+              input(type="radio" v-model="alert" name="alert" value="false")
               span
-                |G3
-            label.radio
-              input(type="radio" v-model="grade" name="grade" value="G2")
-              span
-                |G2
-            label.radio
-              input(type="radio" v-model="grade" name="grade" value="G1")
-              span
-                |G1
-            label.radio
-              input(type="radio" v-model="grade" name="grade" value="N2")
-              span
-                |N2
-            label.radio
-              input(type="radio" v-model="grade" name="grade" value="N1")
-              span
-                |N1
+                |OFF
         .field
           p.subtitle.is-6
             |姓

@@ -5,32 +5,16 @@
       .modal-inner
         .field
           p.subtitle.is-6
-            |優先度
+            |アラート
           .control
             label.radio
-              input(type="radio" v-model="data.grade" name="grade" value="P")
+              input(type="radio" v-model="data.alert" name="alert" value="true" @change="confirmAlertChagne")
               span
-                |P
+                |ON
             label.radio
-              input(type="radio" v-model="data.grade" name="grade" value="G3")
+              input(type="radio" v-model="data.alert" name="alert" value="false" @change="confirmAlertChagne")
               span
-                |G3
-            label.radio
-              input(type="radio" v-model="data.grade" name="grade" value="G2")
-              span
-                |G2
-            label.radio
-              input(type="radio" v-model="data.grade" name="grade" value="G1")
-              span
-                |G1
-            label.radio
-              input(type="radio" v-model="data.grade" name="grade" value="N2")
-              span
-                |N2
-            label.radio
-              input(type="radio" v-model="data.grade" name="grade" value="N1")
-              span
-                |N1
+                |OFF
         .field
           p.subtitle.is-6
             |姓
@@ -83,10 +67,15 @@ export default {
     toggleModal () {
       this.$store.commit('modal/toggleAddClient')
     },
+    confirmAlertChagne (e) {
+      if (e.target.value === 'false') {
+        alert('アラートモードの解除基準は、原則発症から10日、症状消失から3日です。(2020/5/15現在)\nこれよりも早期に解除する場合には、医師による相応の判断が必要と考えます。1回のPCR検査陰性に基づいて解除されるものではありません。ていねいな臨床診断がなによりも大切です。')
+      }
+    },
     async addClient () {
-      if (this.data.grade !== null && this.data.age !== null && this.data.gender !== null && this.data.initial !== null && this.data.address !== null) {
+      if (this.data.alert !== null && this.data.age !== null && this.data.gender !== null && this.data.initial !== null && this.data.address !== null) {
         await this.$axios.post('/api/v1/clients', {
-          grade: this.data.grade,
+          alert: this.data.alert,
           age: this.data.age,
           gender: this.data.gender,
           initial: this.data.initial,
@@ -105,9 +94,9 @@ export default {
       }
     },
     async updateClient () {
-      if (this.data.grade !== null && this.data.age !== null && this.data.gender !== null && this.data.initial !== null && this.data.address !== null) {
+      if (this.data.alert !== null && this.data.age !== null && this.data.gender !== null && this.data.initial !== null && this.data.address !== null) {
         await this.$axios.put('/api/v1/clients/' + this.$store.state.dashboard.client.uid, {
-          grade: this.data.grade,
+          alert: this.data.alert,
           age: this.data.age,
           gender: this.data.gender,
           initial: this.data.initial,

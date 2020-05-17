@@ -96,12 +96,10 @@ export default {
 <style lang="sass">
 .dashboard-container
   margin: 0 !important
-
 .dashboard-main-container
   .is-menu-active &
     @include mediaQuery-down(sm)
       display: none
-
 .dashboard-column
   padding: 0
   margin: 0

@@ -12,7 +12,7 @@
       .dashboard-menu-clients-container
         ul.dashboard-menu-clients-legend
           li
-            Client(:data="{grade: 'クラス', age: '年齢', gender: '性別', initial: '姓', address: '居住地', statuses: [{text: 'ステータス'}]}" :background="'#7a7a7a'")
+            Client(:data="{alert: null, age: '年齢', gender: '性別', initial: '姓', address: '居住地', statuses: [{text: 'ステータス'}]}" :background="'#7a7a7a'")
         ul.dashboard-menu-clients(:style="{ height: height - 235 + 'px' }")
           li(v-for="(client, key, index) in $store.state.dashboard.clients")
             Client(:data="client" :background="client.id === $store.state.dashboard.client.id ? '#bbd4f5' : (index % 2 != 0 ? '#cacaca' : '#e8e8e8')")

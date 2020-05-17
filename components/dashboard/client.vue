@@ -1,14 +1,17 @@
 <template lang="pug">
 .dashboard-menu-client(:style="{ backgroundColor: background }")
   .dashboard-menu-client-attributes
-    p
-      |{{data.grade}}
+    p.dashboard-menu-client-alert.is-alert(v-if="data.alert === true")
+      font-awesome-icon(:icon="['fas', 'exclamation-triangle']")
+    p.dashboard-menu-client-alert.is-safe(v-if="data.alert === false")
+      font-awesome-icon(:icon="['fas', 'circle']")
     p
       |{{data.initial}}
     p
       |{{data.age}}
     p
       |{{data.gender}}
+  .dashboard-menu-client-address
     p
       |{{data.address}}
   .dashboard-menu-client-status
@@ -29,15 +32,22 @@ export default {
 .dashboard-menu-client-attributes
   display: flex
   flex-wrap: wrap
+  align-items: center
   p
     color: black
     width: 25%
     font-weight: bold
-    &:last-child
-      width: 100%
-      font-size: 13px
-      font-weight: normal
-      padding: 5px 0
+  .dashboard-menu-client-alert
+    color: #ff4646
+    &.is-safe
+      color: #1dbd00
+.dashboard-menu-client-address
+  p
+    color: black
+    width: 100%
+    font-size: 13px
+    font-weight: normal
+    padding: 5px 0
 .dashboard-menu-client-status
   p
     color: black
