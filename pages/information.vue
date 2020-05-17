@@ -8,7 +8,7 @@
       nuxt-link(to="/auth/edit")
         p.subtitle
           |アカウント情報を編集
-      nuxt-link(to="/sca")
+      //nuxt-link(to="/sca")
         p.subtitle
           |SCA covid19
       //nuxt-link(to="/needhelps")
