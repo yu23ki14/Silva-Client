@@ -39,7 +39,7 @@ export default function ({ $axios, store, route, redirect }) {
         store.commit('message/setMessage', { message: 'ログインしてください。' })
         window.location.href = ('/auth/login')
       })
-  } else if (nonAuthPath.includes(route.path)) {
+  } else if (!nonAuthPath.includes(route.path)) {
     window.location.href = ('/auth/login')
   }
 }
