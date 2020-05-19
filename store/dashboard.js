@@ -38,7 +38,19 @@ export const mutations = {
   updateStatuses (state, { data }) {
     state.statuses = [ data, ...state.statuses ]
   },
+  removeStatus (state, data) {
+    const n = [...state.statuses]
+    const x = n.splice(data, 1)
+    console.log(x)
+    console.log(n)
+    state.statuses = n
+  },
   setActions (state, { data }) {
     state.actions = data
+  },
+  removeAction (state, data) {
+    const n = [...state.actions]
+    n.splice(data, 1)
+    state.actions = n
   }
 }

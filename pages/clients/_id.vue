@@ -84,7 +84,7 @@ export default {
           const client = res.data.client
           const statuses = res.data.statuses
           const actions = res.data.actions
-          const tmpTeam = { care_manager: { user: {}, action: {} }, clinic: { user: {}, action: {} }, nurse: { user: {}, action: {} }, care: { user: {}, action: {} }, rehabilitation: { user: {}, action: {} }, medicine: { user: {}, action: {} }, day_service: { user: {}, action: {} }, dentistry: { user: {}, action: {} }, other: { user: {}, action: {} } }
+          const tmpTeam = { care_manager: { user: {}, action: {} }, clinic: { user: {}, action: {} }, nurse: { user: {}, action: {} }, care: { user: {}, action: {} }, rehabilitation: { user: {}, action: {} }, medicine: { user: {}, action: {} }, day_service: { user: {}, action: {} }, dentistry: { user: {}, action: {} }, mequipment: { user: {}, action: {} }, wequipment: { user: {}, action: {} }, other: { user: {}, action: {} } }
           team.forEach(member =>
             (tmpTeam[member.role] = { user: member.user, action: member.action[0] || {} })
           )

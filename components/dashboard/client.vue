@@ -10,7 +10,7 @@
     p
       |{{data.age}}
     p
-      |{{data.gender}}
+      |{{genderFormatter(data.gender)}}
   .dashboard-menu-client-address
     p
       |{{data.address}}

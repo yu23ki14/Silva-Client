@@ -8,24 +8,8 @@
             |アクションを追加する役割を選択してください。
           .select.is-fullwidth
             select(v-model="role")
-              option(value="care_manager")
-                |ケアマネージャー
-              option(value="clinic")
-                |訪問診療
-              option(value="nurse")
-                |訪問看護
-              option(value="care")
-                |訪問介護
-              option(value="rehabilitation")
-                |訪問リハビリテーション
-              option(value="medicine")
-                |訪問薬剤
-              option(value="day_service")
-                |デイ/施設
-              option(value="dentistry")
-                |訪問歯科
-              option(value="other")
-                |その他
+              option(v-for="r in role_list" :value="r")
+                |{{roleFormatter(r, false)}}
         .field
           p.subtitle.is-6
             |アクション内容を入力してください。
@@ -43,7 +27,8 @@ export default {
   data () {
     return {
       role: '',
-      text: ''
+      text: '',
+      role_list: ['care_manager', 'clinic', 'nurse', 'care', 'rehabilitation', 'medicine', 'day_service', 'dentistry', 'mequipment', 'wequipment', 'other']
     }
   },
   methods: {

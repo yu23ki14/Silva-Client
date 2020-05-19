@@ -24,158 +24,25 @@
             th
               |最終更新日時
         tbody(v-if="list")
-          tr
+          tr(v-for="role in role_list")
             td
-              |ケアマネ
+              |{{roleFormatter(role, true)}}
             td
-              span.inviting(v-if="$store.state.dashboard.team.care_manager.user.inviting")
+              span.inviting(v-if="$store.state.dashboard.team[role].user.inviting")
                 |招待中
-              |{{$store.state.dashboard.team.care_manager.user.name}}
+              |{{$store.state.dashboard.team[role].user.name}}
             td
-              |{{$store.state.dashboard.team.care_manager.action.text}}
+              |{{$store.state.dashboard.team[role].action.text}}
             td
-              span.dashoboard-team-action-date(v-if="$store.state.dashboard.team.care_manager.user.name != undefined")
-                |{{dateFormatter($store.state.dashboard.team.care_manager.action.created_at, 'YYYY/MM/DD (WW)')}}
+              span(v-if="$store.state.dashboard.team[role].user.inviting")
+                button.button.is-dark.is-small.is-fullwidth(@click="deleteInvitation($store.state.dashboard.team[role].user.invitation_id)")
+                  |取り消す
+              span.dashoboard-team-action-date(v-else-if="$store.state.dashboard.team[role].user.name != undefined")
+                |{{dateFormatter($store.state.dashboard.team[role].action.created_at, 'YYYY/MM/DD (WW)')}}
                 br
-                |{{dateFormatter($store.state.dashboard.team.care_manager.action.created_at, 'hh時mm分')}}
+                |{{dateFormatter($store.state.dashboard.team[role].action.created_at, 'hh時mm分')}}
               span(v-else)
-                button.button.is-small.is-fullwidth(@click="userModal($store.state.dashboard.client.id, 'care_manager')")
-                  |追加する＋
-          tr
-            td
-              |訪問診療
-            td
-              span.inviting(v-if="$store.state.dashboard.team.clinic.user.inviting")
-                |招待中
-              |{{$store.state.dashboard.team.clinic.user.name}}
-            td
-              |{{$store.state.dashboard.team.clinic.action.text}}
-            td
-              span.dashoboard-team-action-date(v-if="$store.state.dashboard.team.clinic.user.name != undefined")
-                |{{dateFormatter($store.state.dashboard.team.clinic.action.created_at, 'YYYY/MM/DD (WW)')}}
-                br
-                |{{dateFormatter($store.state.dashboard.team.clinic.action.created_at, 'hh時mm分')}}
-              span(v-else)
-                button.button.is-small.is-fullwidth(@click="userModal($store.state.dashboard.client.id, 'clinic')")
-                  |追加する＋
-          tr
-            td
-              |訪問看護
-            td
-              span.inviting(v-if="$store.state.dashboard.team.nurse.user.inviting")
-                |招待中
-              |{{$store.state.dashboard.team.nurse.user.name}}
-            td
-              |{{$store.state.dashboard.team.nurse.action.text}}
-            td
-              span.dashoboard-team-action-date(v-if="$store.state.dashboard.team.nurse.user.name != undefined")
-                |{{dateFormatter($store.state.dashboard.team.nurse.action.created_at, 'YYYY/MM/DD (WW)')}}
-                br
-                |{{dateFormatter($store.state.dashboard.team.nurse.action.created_at, 'hh時mm分')}}
-              span(v-else)
-                button.button.is-small.is-fullwidth(@click="userModal($store.state.dashboard.client.id, 'nurse')")
-                  |追加する＋
-          tr
-            td
-              |訪問介護
-            td
-              span.inviting(v-if="$store.state.dashboard.team.care.user.inviting")
-                |招待中
-              |{{$store.state.dashboard.team.care.user.name}}
-            td
-              |{{$store.state.dashboard.team.care.action.text}}
-            td
-              span.dashoboard-team-action-date(v-if="$store.state.dashboard.team.care.user.name != undefined")
-                |{{dateFormatter($store.state.dashboard.team.care.action.created_at, 'YYYY/MM/DD (WW)')}}
-                br
-                |{{dateFormatter($store.state.dashboard.team.care.action.created_at, 'hh時mm分')}}
-              span(v-else)
-                button.button.is-small.is-fullwidth(@click="userModal($store.state.dashboard.client.id, 'care')")
-                  |追加する＋
-          tr
-            td
-              |訪問リハ
-            td
-              span.inviting(v-if="$store.state.dashboard.team.rehabilitation.user.inviting")
-                |招待中
-              |{{$store.state.dashboard.team.rehabilitation.user.name}}
-            td
-              |{{$store.state.dashboard.team.rehabilitation.action.text}}
-            td
-              span.dashoboard-team-action-date(v-if="$store.state.dashboard.team.rehabilitation.user.name != undefined")
-                |{{dateFormatter($store.state.dashboard.team.rehabilitation.action.created_at, 'YYYY/MM/DD (WW)')}}
-                br
-                |{{dateFormatter($store.state.dashboard.team.rehabilitation.action.created_at, 'hh時mm分')}}
-              span(v-else)
-                button.button.is-small.is-fullwidth(@click="userModal($store.state.dashboard.client.id, 'rehabilitation')")
-                  |追加する＋
-          tr
-            td
-              |訪問薬剤
-            td
-              span.inviting(v-if="$store.state.dashboard.team.medicine.user.inviting")
-                |招待中
-              |{{$store.state.dashboard.team.medicine.user.name}}
-            td
-              |{{$store.state.dashboard.team.medicine.action.text}}
-            td
-              span.dashoboard-team-action-date(v-if="$store.state.dashboard.team.medicine.user.name != undefined")
-                |{{dateFormatter($store.state.dashboard.team.medicine.action.created_at, 'YYYY/MM/DD (WW)')}}
-                br
-                |{{dateFormatter($store.state.dashboard.team.medicine.action.created_at, 'hh時mm分')}}
-              span(v-else)
-                button.button.is-small.is-fullwidth(@click="userModal($store.state.dashboard.client.id, 'medicine')")
-                  |追加する＋
-          tr
-            td
-              |デイ/施設
-            td
-              span.inviting(v-if="$store.state.dashboard.team.day_service.user.inviting")
-                |招待中
-              |{{$store.state.dashboard.team.day_service.user.name}}
-            td
-              |{{$store.state.dashboard.team.day_service.action.text}}
-            td
-              span.dashoboard-team-action-date(v-if="$store.state.dashboard.team.day_service.user.name != undefined")
-                |{{dateFormatter($store.state.dashboard.team.day_service.action.created_at, 'YYYY/MM/DD (WW)')}}
-                br
-                |{{dateFormatter($store.state.dashboard.team.day_service.action.created_at, 'hh時mm分')}}
-              span(v-else)
-                button.button.is-small.is-fullwidth(@click="userModal($store.state.dashboard.client.id, 'day_service')")
-                  |追加する＋
-          tr
-            td
-              |訪問歯科
-            td
-              span.inviting(v-if="$store.state.dashboard.team.dentistry.user.inviting")
-                |招待中
-              |{{$store.state.dashboard.team.dentistry.user.name}}
-            td
-              |{{$store.state.dashboard.team.dentistry.action.text}}
-            td
-              span.dashoboard-team-action-date(v-if="$store.state.dashboard.team.dentistry.user.name != undefined")
-                |{{dateFormatter($store.state.dashboard.team.dentistry.action.created_at, 'YYYY/MM/DD (WW)')}}
-                br
-                |{{dateFormatter($store.state.dashboard.team.dentistry.action.created_at, 'hh時mm分')}}
-              span(v-else)
-                button.button.is-small.is-fullwidth(@click="userModal($store.state.dashboard.client.id, 'dentistry')")
-                  |追加する＋
-          tr
-            td
-              |その他
-            td
-              span.inviting(v-if="$store.state.dashboard.team.other.user.inviting")
-                |招待中
-              |{{$store.state.dashboard.team.other.user.name}}
-            td
-              |{{$store.state.dashboard.team.other.action.text}}
-            td
-              span.dashoboard-team-action-date(v-if="$store.state.dashboard.team.other.user.name != undefined")
-                |{{dateFormatter($store.state.dashboard.team.other.action.created_at, 'YYYY/MM/DD (WW)')}}
-                br
-                |{{dateFormatter($store.state.dashboard.team.other.action.created_at, 'hh時mm分')}}
-              span(v-else)
-                button.button.is-small.is-fullwidth(@click="userModal($store.state.dashboard.client.id, 'other')")
+                button.button.is-small.is-fullwidth(@click="userModal($store.state.dashboard.client.id, role)")
                   |追加する＋
 </template>
 
@@ -183,7 +50,8 @@
 export default {
   data () {
     return {
-      list: true
+      list: true,
+      role_list: ['care_manager', 'clinic', 'nurse', 'care', 'rehabilitation', 'medicine', 'day_service', 'dentistry', 'mequipment', 'wequipment', 'other']
     }
   },
   methods: {
@@ -195,6 +63,19 @@ export default {
     },
     toggleList () {
       this.list = !this.list
+    },
+    deleteInvitation (id) {
+      const confirmation = confirm('招待を取り消しても良いですか？')
+      if (confirmation) {
+        this.$axios.delete('/api/v1/invitations/' + id).then((res) => {
+          this.$store.commit('dashboard/updateTeamRole', { data: res.data })
+        },
+        () => {
+          this.$store.commit('message/setMessage', { message: 'エラーが発生しました。', messageType: 'danger' })
+        })
+      } else {
+
+      }
     }
   }
 }
@@ -224,13 +105,14 @@ export default {
     width: 100%
     border: 1px solid #dbdbdb
     @include mediaQuery-down(sm)
-      width: 700px
+      width: 100%
+      min-width: 680px
   thead
     th
       &:first-child
         width: 100px
       &:nth-child(2)
-        width: 200px
+        width: 160px
         @include mediaQuery-down(sm)
           width: 150px
       &:nth-child(4)
@@ -240,8 +122,6 @@ export default {
       padding: .9em .75em
       font-size: 1rem
       line-height: 1.2rem
-  .button
-    background-color: lightgray
   .inviting
     padding-right: 5px
 </style>

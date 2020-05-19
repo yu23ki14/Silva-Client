@@ -27,8 +27,8 @@
           .control
             .select
               select(v-model="data.age")
-                option(:value="n + 50" v-for="n in 50")
-                  |{{n + 50}}
+                option(:value="n-1" v-for="n in 120")
+                  |{{n-1}}
         .field
           p.subtitle.is-6
             |性別
@@ -68,7 +68,7 @@ export default {
       this.$store.commit('modal/toggleAddClient')
     },
     confirmAlertChagne (e) {
-      if (e.target.value === 'false') {
+      if (e.target.value === 'false' && this.$store.state.modal.add_client.type === 'edit') {
         alert('アラートモードの解除基準は、原則発症から10日、かつ薬剤服用なしで症状消失から3日です。(2020/5/15現在)\nこれよりも早期に解除する場合には、医師による相応の判断が必要と考えます。 \n\nPCR検査は、病原体の非存在証明にはなりません。したがって感染予防策の変更を意味するアラートモード解除は、1回の陰性結果に基づいて行われるものではありません。 1回目のPCR検査が陰性でも、症状が持続し感染が疑われるようなら2回目の検査が考慮される場合もあります。')
       }
     },
@@ -95,6 +95,9 @@ export default {
     },
     async updateClient () {
       if (this.data.alert !== null && this.data.age !== null && this.data.gender !== null && this.data.initial !== null && this.data.address !== null) {
+        if (this.data.alert !== true) {
+          this.data.alert = this.data.alert === 'true'
+        }
         await this.$axios.put('/api/v1/clients/' + this.$store.state.dashboard.client.uid, {
           alert: this.data.alert,
           age: this.data.age,
@@ -104,6 +107,7 @@ export default {
           underlying_illnesses: this.data.underlying_illnesses
         })
           .then((res) => {
+            this.$store.commit('dashboard/setStatuses', { data: res.data.statuses.reverse() })
             this.$store.commit('dashboard/updateClients', { data: res.data })
             this.$store.commit('dashboard/setClient', { data: res.data })
             this.toggleModal()

@@ -19,8 +19,10 @@
               |アクション
             th
               |更新日時
+            th
+              |
         tbody(v-if="list")
-          tr(v-for="action in $store.state.dashboard.actions")
+          tr(v-for="(action, index) in $store.state.dashboard.actions")
             td
               |{{roleFormatter(action.role, true)}}
             td
@@ -29,6 +31,9 @@
               |{{dateFormatter(action.created_at, 'YYYY/MM/DD (WW)')}}
               br
               |{{dateFormatter(action.created_at, 'hh時mm分')}}
+            td
+              button.button.is-dark.is-small(@click="deleteAction(action.id, roleFormatter(action.role, false), action.text, index)")
+                |削除
 </template>
 
 <script>
@@ -41,6 +46,19 @@ export default {
   methods: {
     toggleList () {
       this.list = !this.list
+    },
+    deleteAction (id, r, t, index) {
+      const confirmation = confirm(r + '：' + t + '\nこのアクションを削除してもよろしいですか？\n削除すると元に戻せません。\n誤入力意外の理由で削除することはおすすめしておりません。')
+      if (confirmation) {
+        this.$axios.delete('/api/v1/actions/' + id).then(() => {
+          this.$store.commit('dashboard/removeAction', index)
+        },
+        () => {
+          this.$store.commit('message/setMessage', { message: 'エラーが発生しました。', messageType: 'danger' })
+        })
+      } else {
+
+      }
     }
   }
 }
@@ -66,13 +84,16 @@ export default {
     width: 100%
     border: 1px solid #dbdbdb
     @include mediaQuery-down(sm)
-      width: 500px
+      width: 100%
+      min-width: 500px
   thead
     th
       &:nth-child(1)
         width: 100px
       &:nth-child(3)
         width: 140px
+      &:nth-child(4)
+        width: 74px
   tbody
     td
       padding: .9em .75em

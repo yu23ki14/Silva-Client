@@ -1,13 +1,11 @@
 <template lang="pug">
-  .edit-container.container
+  .edit-container
+    .columns
+      .column.is-three-fifths.is-offset-one-fifth
+        nuxt-link(to="/information")
+          |< 戻る
     .columns
       .column.is-4.is-offset-4
-        nuxt-link(to="/")
-          |< ホームに戻る
-
-        .field
-          img(src="~assets/images/logos/logo-blue.svg" width="250")
-
         .field
           p.control.has-icons-left.has-icons-right
             input.input(type="email" placeholder="Email" v-model="user.email")
@@ -60,7 +58,7 @@ export default {
 
 <style lang="sass">
 .edit-container
-  padding: 50px 10px 0
+  margin: 20px 10px
   .field
     text-align: center
   img

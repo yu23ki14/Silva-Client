@@ -23,6 +23,10 @@ Vue.mixin({
             return '訪問歯科'
           case 'other':
             return 'その他'
+          case 'mequipment':
+            return '医療機器'
+          case 'wequipment':
+            return '福祉用具'
         }
       } else {
         switch (role) {
@@ -44,7 +48,25 @@ Vue.mixin({
             return '訪問歯科'
           case 'other':
             return 'その他'
+          case 'mequipment':
+            return '医療機器'
+          case 'wequipment':
+            return '福祉用具'
+          default:
+            return ' '
         }
+      }
+    },
+    genderFormatter (gender) {
+      switch (gender) {
+        case 'M':
+          return '男性'
+        case 'F':
+          return '女性'
+        case 'L':
+          return '性別'
+        default:
+          return ' '
       }
     },
     dateFormatter (inputdate, format, is12hours) {

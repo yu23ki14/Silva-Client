@@ -17,7 +17,7 @@
               |{{$store.state.dashboard.client.age}}
             p
               |性別：
-              |{{$store.state.dashboard.client.gender}}
+              |{{genderFormatter($store.state.dashboard.client.gender)}}
             p
               |居住地：
               |{{$store.state.dashboard.client.address}}
@@ -73,8 +73,7 @@ export default {
   z-index: 1
   @include mediaQuery-down(sm)
     flex-direction: column-reverse
-    width: 90%
-    margin: 0 auto
+    width: 100%
     padding: 9px 5%
     flex-wrap: wrap
 .dashboard-header-content
