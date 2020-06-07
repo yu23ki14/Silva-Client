@@ -108,10 +108,11 @@ export default {
     margin-right: 10px
     @include mediaQuery-down(sm)
       width: auto
+      margin: 0 10px 10px 0
   .dashboard-header-back-button
     display: none
     @include mediaQuery-down(sm)
-      display: block
+      display: inline-block
   button.is-status-update
     background-color: $brand-secondary
     color: white
