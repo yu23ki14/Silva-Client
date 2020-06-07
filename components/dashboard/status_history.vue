@@ -75,7 +75,6 @@ export default {
 .dashboard-status-history-table
   width: 100%
   margin-top: 20px
-  border: 1px solid #dbdbdb
   thead
     th
       &:nth-child(2)

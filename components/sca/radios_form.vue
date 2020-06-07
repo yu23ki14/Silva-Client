@@ -4,11 +4,11 @@
       p
         |{{item.label}}
       label
-        input(type="radio" :name="item.id" @change="update" :value="true")
+        input(type="radio" v-model="answer[item.id]" :value="true")
         span
           |あり
       label
-        input(type="radio" :name="item.id" @change="update" :value="false")
+        input(type="radio" v-model="answer[item.id]" :value="false")
         span
           |なし
 </template>
@@ -19,11 +19,6 @@ export default {
   data () {
     return {
       answer: {}
-    }
-  },
-  methods: {
-    update (e) {
-      this.answer[e.target.name] = e.target.value.toLowerCase() === 'true'
     }
   }
 }

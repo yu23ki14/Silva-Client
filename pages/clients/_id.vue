@@ -9,6 +9,8 @@
     AddClientModal(:data="add_client")
     AddStatusModal
     AddActionModal
+    ScaContentModal(v-if="$store.state.modal.sca_content.display")
+    ScaLeadModal
     SetMyRoleModal
     InvitationModal(:data="invitations")
 </template>
@@ -21,6 +23,8 @@ import AddUserModal from '../../components/dashboard/modal/add_user'
 import AddClientModal from '../../components/dashboard/modal/add_client'
 import AddStatusModal from '../../components/dashboard/modal/add_status'
 import AddActionModal from '../../components/dashboard/modal/add_action'
+import ScaContentModal from '../../components/dashboard/modal/sca_content'
+import ScaLeadModal from '../../components/dashboard/modal/sca_lead'
 import SetMyRoleModal from '../../components/dashboard/modal/set_my_role'
 import InvitationModal from '../../components/dashboard/modal/invitations'
 
@@ -33,6 +37,8 @@ export default {
     AddClientModal,
     AddStatusModal,
     AddActionModal,
+    ScaContentModal,
+    ScaLeadModal,
     SetMyRoleModal,
     InvitationModal
   },

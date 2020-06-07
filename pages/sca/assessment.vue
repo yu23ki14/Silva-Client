@@ -12,10 +12,12 @@
           RadiosForm(v-if="assessment.question_groups[step].form_type === 'radios'" :q="assessment.question_groups[step].question_items" ref="formAnswer")
           NumberForm(v-if="assessment.question_groups[step].form_type === 'number'" :q="assessment.question_groups[step].question_items" ref="formAnswer")
           TextareaForm(v-if="assessment.question_groups[step].form_type === 'textarea'" :q="assessment.question_groups[step].question_items" ref="formAnswer")
-        .field
+        .field.sca-form-buttons
           p.control
             button.button.is-fullwidth.is-info(@click="next")
               | 次へ
+            button.button.is-fullwidth.is-light(@click="prev" v-if="this.step > 0")
+              | 戻る
 </template>
 
 <script>
@@ -39,28 +41,72 @@ export default {
     return {
       step: 0,
       answers: {},
-      formSwitch: false
+      formSwitch: false,
+      alert: true
     }
   },
   async asyncData (context) {
-    const a = await context.$axios.get(context.$req2('/api/v1/assessments/9rLVhkKhLOigqH8205A2Tg', 'sca'))
-      .then((res) => {
-        return res.data
-      }).catch(() => {
-        context.$store.commit('message/setMessage', { message: 'エラーが発生しました。ブラウザをリロードしてみてください。', messageType: 'danger' })
-      })
-    return { assessment: a }
+    if (context.store.state.sca.data.client_id === null) {
+      context.redirect('/')
+    } else {
+      const a = await context.$axios.get(context.$req2('/api/v1/assessments/9rLVhkKhLOigqH8205A2Tg', 'sca'))
+        .then((res) => {
+          return res.data
+        }).catch(() => {
+          context.$store.commit('message/setMessage', { message: 'エラーが発生しました。ブラウザをリロードしてみてください。', messageType: 'danger' })
+        })
+      return { assessment: a }
+    }
   },
   methods: {
     next () {
       if (this.step + 1 === this.assessment.question_groups.length) {
-        this.$router.push('/sca/result')
+        this.answers[this.assessment.question_groups[this.step].id] = this.$refs.formAnswer.answer
+        this.$axios.post(this.req2('/api/v1/assessment_answers', 'sca'), {
+          data: this.answers,
+          uid: this.$store.state.sca.data.client_id,
+          assessment_id: this.assessment.id
+        }).then(() => {
+          this.$router.push('/clients/' + this.$store.state.sca.data.client_id)
+        })
+      } else if (this.step === 4 && this.$refs.formAnswer.answer.length > 0) {
+        this.formSwitch = true
+        this.alert = false
+        this.answers[this.assessment.question_groups[this.step].id] = this.$refs.formAnswer.answer
+        this.step += 2
+        setTimeout(() => {
+          if (this.answers[this.assessment.question_groups[this.step].id] !== undefined) {
+            this.$refs.formAnswer.checked_answer = Object.keys(this.answers[this.assessment.question_groups[this.step].id])
+            this.$refs.formAnswer.answer = this.answers[this.assessment.question_groups[this.step].id]
+          }
+          this.formSwitch = false
+        }, 10)
       } else {
         this.formSwitch = true
         this.answers[this.assessment.question_groups[this.step].id] = this.$refs.formAnswer.answer
         this.step += 1
-        this.title = this.assessment.question_groups[this.step - 1].title
+        setTimeout(() => {
+          if (this.answers[this.assessment.question_groups[this.step].id] !== undefined) {
+            this.$refs.formAnswer.checked_answer = Object.keys(this.answers[this.assessment.question_groups[this.step].id])
+            this.$refs.formAnswer.answer = this.answers[this.assessment.question_groups[this.step].id]
+          }
+          this.formSwitch = false
+        }, 10)
+      }
+    },
+    prev () {
+      if (this.step > 0) {
+        this.formSwitch = true
+        if (this.step + 1 === this.assessment.question_groups.length && !this.alert) {
+          this.step -= 2
+        } else {
+          this.step -= 1
+        }
         this.formSwitch = false
+        setTimeout(() => {
+          this.$refs.formAnswer.checked_answer = Object.keys(this.answers[this.assessment.question_groups[this.step].id])
+          this.$refs.formAnswer.answer = this.answers[this.assessment.question_groups[this.step].id]
+        }, 10)
       }
     }
   }
@@ -71,5 +117,8 @@ export default {
 .sca-container
   padding: 30px 15px 0
   .field
-    margin-bottom: 30px
+    margin-bottom: 20px
+  .sca-form-buttons
+    button
+      margin-bottom: 10px
 </style>

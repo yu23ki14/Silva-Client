@@ -103,7 +103,6 @@ export default {
   overflow: auto
   table
     width: 100%
-    border: 1px solid #dbdbdb
     @include mediaQuery-down(sm)
       width: 100%
       min-width: 680px

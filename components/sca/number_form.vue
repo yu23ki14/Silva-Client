@@ -4,7 +4,7 @@
       label.control
         p
           |{{item.label}}
-        input.input(type="number" @change="update" :item_id="item.id" placeholder="数値を入力してください。")
+        input.input(type="number" v-model="answer[item.id]" placeholder="数値を入力してください。")
 </template>
 
 <script>

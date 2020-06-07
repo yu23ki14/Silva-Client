@@ -85,6 +85,8 @@ export default {
           .then((res) => {
             this.$store.commit('dashboard/updateClients', { data: res.data })
             this.toggleModal()
+            this.$store.commit('sca/setData', { clientId: res.data.uid })
+            this.$store.commit('modal/toggleScaLead')
           },
           () => {
             this.$store.commit('message/setMessage', { message: 'エラーが発生しました。', messageType: 'danger' })

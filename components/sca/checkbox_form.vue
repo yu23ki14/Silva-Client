@@ -2,7 +2,7 @@
   ul.checkbox-form
     li(v-for="item in q")
       label
-        input(type="checkbox" v-model="answer" :value="item.id")
+        input(type="checkbox" v-model="answer[item.id]")
         span
           |{{item.label}}
 </template>
@@ -12,7 +12,7 @@ export default {
   props: ['q'],
   data () {
     return {
-      answer: []
+      answer: {}
     }
   }
 }

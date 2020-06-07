@@ -3,10 +3,10 @@
     ul
       li(v-for="item in q")
         label
-          input(type="checkbox" v-model="checked_answer" :value="item.id" @change="update")
+          input(type="checkbox" v-model="checked_answer" :value="String(item.id)" @change="update")
           span
             |{{item.label}}
-        span.icon.is-small(v-if="checked_answer.includes(item.id)" v-on:click="dp_target_id = item.id")
+        span.icon.is-small(v-if="checked_answer.includes(String(item.id))" @click="dp_target_id = item.id")
           font-awesome-icon(:icon="['fas', 'calendar-alt']")
         p(v-if="answer[item.id] !== undefined")
           |{{answer[item.id].date}}
@@ -63,7 +63,7 @@ export default {
   li
     display: flex
     align-items: center
-    margin-bottom: 15px
+    margin-bottom: 10px
   label
     display: flex
     align-items: center

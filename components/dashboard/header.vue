@@ -1,12 +1,22 @@
 <template lang="pug">
   .dashboard-header
     .dashboard-header-inner(v-if="Object.keys($store.state.dashboard.client).length != 0" v-for="n in 2")
+      .dashboard-header-buttons
+        button.button.is-light.dashboard-header-back-button(@click="backMenu")
+          font-awesome-icon(:icon="['fas', 'chevron-left']")
+          |戻る
+        button.button(@click="statusModal($store.state.dashboard.client.id)")
+          |ステータス更新
+        button.button(@click="$store.commit('modal/toggleScaContent')")
+          |SCA19
+        button.button(@click="editClientModal")
+          |患者情報編集
       .dashboard-header-content
         .dashboard-header-info
           .dashboard-header-alert
-            p.title.is-3.is-alert(v-if="$store.state.dashboard.client.alert === true")
+            p.title.is-4.is-alert(v-if="$store.state.dashboard.client.alert === true")
               font-awesome-icon(:icon="['fas', 'exclamation-triangle']")
-            p.title.is-3.is-safe(v-if="$store.state.dashboard.client.alert === false")
+            p.title.is-4.is-safe(v-if="$store.state.dashboard.client.alert === false")
               font-awesome-icon(:icon="['fas', 'circle']")
           .dashboard-header-client-attributes
             p
@@ -24,14 +34,6 @@
         .dashboard-header-client-status
           p.title.is-6
             |ステータス：{{$store.state.dashboard.statuses.length > 0 ? $store.state.dashboard.statuses[0].text : '未入力'}}
-      .dashboard-header-buttons.buttons
-        button.button.is-light.dashboard-header-back-button(@click="backMenu")
-          font-awesome-icon(:icon="['fas', 'chevron-left']")
-          |戻る
-        button.button(@click="editClientModal")
-          |患者情報編集
-        button.button.is-status-update(@click="statusModal($store.state.dashboard.client.id)")
-          |ステータス更新
 </template>
 
 <script>
@@ -64,19 +66,18 @@ export default {
       @include mediaQuery-down(sm)
         width: 100%
 .dashboard-header-inner
-  display: flex
-  justify-content: space-between
   border-bottom: 2px solid lightgrey
   background-color: $brand-primary-thin
-  padding: 9px 25px
+  padding: 15px 20px
   min-height: 97px
   z-index: 1
   @include mediaQuery-down(sm)
     flex-direction: column-reverse
     width: 100%
-    padding: 9px 5%
+    padding: 10px 5%
     flex-wrap: wrap
 .dashboard-header-content
+  width: 100%
   @include mediaQuery-up(sm)
     padding-right: 20px
 .dashboard-header-info
@@ -100,13 +101,11 @@ export default {
 .dashboard-header-client-status
   margin-top: 10px
 .dashboard-header-buttons
-  width: 145px
-  @include mediaQuery-down(sm)
-    width: 100%
-    &:last-child
-      margin-bottom: 5px
+  width: 100%
+  margin-bottom: 10px
   button
     font-size: 14px
+    margin-right: 10px
     @include mediaQuery-down(sm)
       width: auto
   .dashboard-header-back-button

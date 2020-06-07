@@ -43,10 +43,12 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    {src: 'bulma/bulma.sass', lang: 'sass'},
     '~/assets/stylesheets/reset.css',
+    '~/assets/stylesheets/bulma.min.css',
     '~/assets/stylesheets/common.sass',
-    '~/assets/stylesheets/modal.sass'
+    '~/assets/stylesheets/modal.sass',
+    '~/assets/stylesheets/table.sass',
+    '~/assets/stylesheets/button.sass'
   ],
 
   styleResources: {
