@@ -11,7 +11,7 @@
         div(v-else)
           .sca-content-modal-inner
             h4
-              | この患者さんに紐づけられたSCAのデータはまだありません。SCA19を起動しますか？
+              | この患者さんに紐づけられたSCA19のデータはまだありません。SCA19を起動しますか？
           .modal-buttons
             button.button.is-light(@click="closeModal")
               |閉じる
