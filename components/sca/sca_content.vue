@@ -35,7 +35,7 @@
                 |{{item.content}}
     .sca-content-button
       button.button.is-info(@click="moveSca")
-        |新しいデータを入力する。
+        |新しいデータを入力する
 </template>
 
 <script>
