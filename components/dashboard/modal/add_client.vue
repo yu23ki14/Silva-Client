@@ -19,7 +19,12 @@
           p.subtitle.is-6
             |姓
           p.control
-            input.input(type="text" placeholder="姓イニシャル" v-model="data.initial" maxlength=1)
+            input.input(type="text" placeholder="姓" v-model="data.last_name" @change="serializeName('last_name')")
+        .field
+          p.subtitle.is-6
+            |名
+          p.control
+            input.input(type="text" placeholder="名" v-model="data.first_name" @change="serializeName('first_name')")
 
         .field
           p.subtitle.is-6
@@ -64,6 +69,14 @@
 export default {
   props: ['data'],
   methods: {
+    serializeName (target) {
+      const tmp = [...this.data[target]]
+      let serialized = tmp[0]
+      for (let index = 0; index < tmp.length - 1; index++) {
+        serialized += '〇'
+      }
+      this.data[target] = serialized
+    },
     toggleModal () {
       this.$store.commit('modal/toggleAddClient')
     },
@@ -73,12 +86,15 @@ export default {
       }
     },
     async addClient () {
-      if (this.data.alert !== null && this.data.age !== null && this.data.gender !== null && this.data.initial !== null && this.data.address !== null) {
+      this.serializeName('first_name')
+      this.serializeName('last_name')
+      if (this.data.alert !== null && this.data.age !== null && this.data.gender !== null && this.data.first_name !== null && this.data.last_name !== null && this.data.address !== null) {
         await this.$axios.post('/api/v1/clients', {
           alert: this.data.alert,
           age: this.data.age,
           gender: this.data.gender,
-          initial: this.data.initial,
+          first_name: this.data.first_name,
+          last_name: this.data.last_name,
           address: this.data.address,
           underlying_illnesses: this.data.underlying_illnesses
         })
@@ -96,7 +112,9 @@ export default {
       }
     },
     async updateClient () {
-      if (this.data.alert !== null && this.data.age !== null && this.data.gender !== null && this.data.initial !== null && this.data.address !== null) {
+      this.serializeName('first_name')
+      this.serializeName('last_name')
+      if (this.data.alert !== null && this.data.age !== null && this.data.gender !== null && this.data.last_name !== null && this.data.first_name !== null && this.data.address !== null) {
         if (this.data.alert !== true) {
           this.data.alert = this.data.alert === 'true'
         }
@@ -104,7 +122,8 @@ export default {
           alert: this.data.alert,
           age: this.data.age,
           gender: this.data.gender,
-          initial: this.data.initial,
+          first_name: this.data.first_name,
+          last_name: this.data.last_name,
           address: this.data.address,
           underlying_illnesses: this.data.underlying_illnesses
         })

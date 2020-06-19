@@ -21,7 +21,7 @@ export default function ({ $axios, store, route, redirect }) {
     store.commit('http/responded')
   })
 
-  const nonAuthPath = ['/auth/login', '/auth/sign_up', '/sca', '/sca/assessment', '/sca/assessment/result']
+  const nonAuthPath = ['/auth/login', '/auth/sign_up', '/about', '/covid19-info']
 
   if (localStorage.getItem('access-token') !== null) {
     $axios.get('/api/v1/auth/validate_token')

@@ -6,17 +6,20 @@
         |< ホームに戻る
       .information-links
         img(src="~assets/images/logos/logo-blue.svg" width="250")
-        nuxt-link(to="/auth/edit")
-          p.subtitle
+        p.subtitle
+          nuxt-link(to="/auth/edit")
             |アカウント情報を編集
-        //nuxt-link(to="/sca")
-          p.subtitle
-            |SCA covid19
-        //nuxt-link(to="/needhelps")
-          p.subtitle
-            |助けを必要としているチーム
-        nuxt-link(to="/auth/logout")
-          p.subtitle
+        p.subtitle
+          nuxt-link(to="/about")
+            |silvaとは
+        p.subtitle
+          nuxt-link(to="/covid19-info")
+            |新型コロナウイルスに関する外部リンク集
+        p.subtitle
+          nuxt-link(to="/auth/edit")
+            |silvaへのご要望
+        p.subtitle
+          nuxt-link(to="/auth/logout")
             |ログアウト
 </template>
 
@@ -32,6 +35,7 @@ export default {
 .information-links
   margin-top: 30px
   text-align: center
-  p
-    margin-top: 10px
+  p.subtitle
+    margin-top: 15px
+    margin-bottom: 0
 </style>

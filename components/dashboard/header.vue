@@ -20,8 +20,8 @@
               font-awesome-icon(:icon="['fas', 'circle']")
           .dashboard-header-client-attributes
             p
-              |姓：
-              |{{$store.state.dashboard.client.initial}}
+              |名前：
+              |{{$store.state.dashboard.client.last_name}} {{$store.state.dashboard.client.first_name}}
             p
               |年齢：
               |{{$store.state.dashboard.client.age}}

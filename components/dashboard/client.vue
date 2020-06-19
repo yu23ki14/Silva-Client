@@ -6,7 +6,7 @@
     p.dashboard-menu-client-alert.is-safe(v-if="data.alert === false")
       font-awesome-icon(:icon="['fas', 'circle']")
     p
-      |{{data.initial}}
+      |{{data.last_name}} {{data.first_name}}
     p
       |{{data.age}}
     p
@@ -35,8 +35,13 @@ export default {
   align-items: center
   p
     color: black
-    width: 25%
     font-weight: bold
+    &:first-of-type
+      margin-right: 15px
+    &:nth-of-type(2)
+      margin-right: 15px
+    &:nth-of-type(3)
+      margin-right: 15px
   .dashboard-menu-client-alert
     color: #ff4646
     &.is-safe
