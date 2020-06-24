@@ -7,7 +7,7 @@
       nuxt-link(to="/auth/login" v-else)
         |< ログイン画面
       .about-silva
-        img(src="~assets/images/logos/logo-blue.svg" width="250")
+        img.about-silva-logo(src="~assets/images/logos/logo-blue.svg" width="250")
         section
           img(src="~assets/images/about/about1.png")
         section
@@ -18,6 +18,7 @@
           img(src="~assets/images/about/about4.png")
         section
           img(src="~assets/images/about/about5.png")
+        iframe(width="560" height="315" src="https://www.youtube.com/embed/MSUQwYItN0s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
       .about-external-links
         external
 </template>
@@ -37,8 +38,12 @@ export default {
   margin: 20px 10px
 .about-silva
   text-align: center
+  iframe
+    margin: 20px 0
   section
     margin-top: 20px
+.about-silva-logo
+  margin: 20px auto
 .about-external-links
   margin-top: 40px
 </style>

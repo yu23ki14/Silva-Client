@@ -16,7 +16,7 @@
           nuxt-link(to="/covid19-info")
             |新型コロナウイルスに関する外部リンク集
         p.subtitle
-          nuxt-link(to="/auth/edit")
+          a(href="https://forms.gle/6SL2WGSo36aZyfXm7" target="blank")
             |silvaへのご要望
         p.subtitle
           nuxt-link(to="/auth/logout")

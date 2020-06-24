@@ -4,9 +4,9 @@
     .modal-content
       .sca-lead-modal-inner
         h4
-          | SCA19は...
+          | SCA19を起動しますか？
         p
-          | SCA19を利用することで
+          | SCA19はCOVID-19感染が疑われる症例について情報を整理し、共有するためのツールです。チーム内での情報共有はもちろんのこと、保健所など第三者に情報を共有する際の漏れを無くしスムーズなやり取りを促します。
       .modal-buttons
         button.button.is-light(@click="toggleModal")
           |閉じる
@@ -36,6 +36,8 @@ export default {
 .sca-lead-modal
   .sca-lead-modal-inner
     padding: 15px
+    p
+      margin: 10px 0
   .modal-buttons
     button
       position: relative

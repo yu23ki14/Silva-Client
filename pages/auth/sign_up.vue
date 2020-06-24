@@ -24,37 +24,16 @@
             input.input(type="text" placeholder="電話番号：任意" v-model="phone_number")
             span.icon.is-small.is-left
               font-awesome-icon(:icon="['fas', 'phone']")
-        // .control.has-icons-left.field
-          .select.is-fullwidth
-            select(v-model="role")
-              option(disabled value="")
-                |事業種
-              option(value="care_manager")
-                |ケアマネージャー
-              option(value="clinic")
-                |訪問診療
-              option(value="nurse")
-                |訪問看護
-              option(value="care")
-                |訪問介護
-              option(value="rehabilitation")
-                |訪問リハビリテーション
-              option(value="medicine")
-                |訪問薬剤
-              option(value="day_service")
-                |デイサービス・施設
-              option(value="dentistry")
-                |訪問歯科
-              option(value="other")
-                |その他
-          span.icon.is-small.is-left
-            i.fas.fa-globe
         .field
           p.control
             button.button.is-success.is-fullwidth.is-info(@click="signUp")
               | 新規登録
         nuxt-link(to="/auth/login")
-          |すでに登録済みの方はこちら
+          p
+            |すでに登録済みの方はこちら
+        nuxt-link(to="/about")
+          p
+            |silvaとは
 </template>
 
 <script>
@@ -105,4 +84,6 @@ export default {
   text-align: center
   img
     margin-bottom: 30px
+  a > p
+    text-align: right
 </style>

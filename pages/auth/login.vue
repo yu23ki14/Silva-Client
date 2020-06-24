@@ -5,22 +5,26 @@
         img(src="~assets/images/logos/logo-blue.svg" width="250")
 
         .field
-          p.control.has-icons-left.has-icons-right
+          .control.has-icons-left.has-icons-right
             input.input(type="email" placeholder="Email" v-model="email")
             span.icon.is-small.is-left
               font-awesome-icon(:icon="['fas', 'envelope']")
         .field
-          p.control.has-icons-left
+          .control.has-icons-left
             input.input(type="password" placeholder="Password" v-model="password")
             span.icon.is-small.is-left
               font-awesome-icon(:icon="['fas', 'lock']")
         .field
-          p.control
+          .control
             button.button.is-fullwidth.is-info(@click="login")
               | ログイン
 
-        nuxt-link(to="/auth/sign_up")
-          |新規登録はこちら
+        p
+          nuxt-link(to="/auth/sign_up")
+            |新規登録はこちら
+        p
+          nuxt-link(to="/about")
+            |silvaとは
 </template>
 
 <script>
@@ -57,4 +61,6 @@ export default {
   text-align: center
   img
     margin-bottom: 30px
+  p
+    text-align: right
 </style>
