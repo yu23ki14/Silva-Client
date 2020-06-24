@@ -15,10 +15,10 @@
         section
           img(src="~assets/images/about/about3.png")
         section
-          img(src="~assets/images/about/about4.png")
-        section
           img(src="~assets/images/about/about5.png")
         iframe(width="560" height="315" src="https://www.youtube.com/embed/MSUQwYItN0s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+        section
+          img(src="~assets/images/about/about4.png")
       .about-external-links
         external
 </template>
@@ -40,6 +40,7 @@ export default {
   text-align: center
   iframe
     margin: 20px 0
+    max-width: 100%
   section
     margin-top: 20px
 .about-silva-logo

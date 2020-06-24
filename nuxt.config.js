@@ -6,11 +6,11 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'Silva',
+    title: 'silva',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Silvaは地域包括医療において、新型コロナウイルス情報をチームで共有し、アクションプランを素早く決定することを手助けします。' }
+      { hid: 'description', name: 'description', content: 'silvaは、診断未確定の発熱者や有症者を⽀援する在宅医療・介護従事者が、診療やケアを継続していくために必要な感染ステータスに関わる情報を瞬時に共有することで、チームの感染を防ぎ、地域での感染拡⼤防⽌を図ることをサポートします。' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
